@@ -46,7 +46,7 @@ class MongoManager(object):
     def getData(self):
         df = pd.DataFrame(columns = ["ts_code", "trade_date", "open", "high", "low", "close", "pre_close", "change", "pct_chg", "vol", "amount"])
 
-        for x in self.dayCol.find():
+        for x in self.daycol.find():
             pd_data = pd.DataFrame.from_dict(x, orient = 'index').T
-            df = df.append(pd_data, ignore_index = True)  
+            df = pd.concat([df, pd_data], ignore_index = True)
         return df
